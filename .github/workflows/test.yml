@@ -33,7 +33,7 @@ jobs:
 
     strategy:
       matrix:
-        version: ['3.8.9', 'latest']
+        version: ['3.8.9-management', 'management']
 
     steps:
       - name: Checkout
@@ -42,5 +42,5 @@ jobs:
       - name: Start RabbitMQ
         uses: ./
         with:
-          version: ${{ matrix.version }}-management
+          version: ${{ matrix.version }}
           definition: ${{ github.workspace }}/definition.json
