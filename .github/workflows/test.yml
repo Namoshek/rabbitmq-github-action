@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        version: ['3.8.9', 'latest']
+        version: ['3.8.9', '3.8.9-management', 'management', 'latest']
 
     steps:
       - name: Checkout
@@ -25,3 +25,4 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
+          definitions: ${{ github.workspace }}/.ci/definitions.json

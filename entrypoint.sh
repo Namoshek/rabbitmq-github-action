@@ -4,11 +4,13 @@ VERSION=$1
 PORTS=$2
 CERTIFICATES=$3
 CONFIG=$4
-PLUGINS=$5
-CONTAINERNAME=$6
+DEFINITIONS=$5
+PLUGINS=$6
+CONTAINERNAME=$7
 
 echo "Certificates: $CERTIFICATES"
 echo "Config: $CONFIG"
+echo "Definitions: $DEFINITIONS"
 
 docker_run="docker run --detach --name $CONTAINERNAME"
 
@@ -23,6 +25,11 @@ fi
 
 if [ -n "$CONFIG" ]; then
   docker_run="$docker_run --volume $CONFIG:/etc/rabbitmq/rabbitmq.conf:ro"
+fi
+
+if [ -n "$DEFINITIONS" ]; then
+  docker_run="$docker_run --volume $DEFINITIONS:/etc/rabbitmq/definitions.json:ro"
+  docker_run="$docker_run -e RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=\"-rabbitmq_management load_definitions '/etc/rabbitmq/definitions.json'\""
 fi
 
 docker_run="$docker_run rabbitmq:$VERSION"

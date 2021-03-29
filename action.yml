@@ -22,6 +22,10 @@ inputs:
     description: 'Absolute path to the `rabbitmq.conf` configuration file to use'
     required: false
     default: ''
+  definitions:
+    description: 'Absolute path to the `definitions.json` definition file to use (requires using a `x.y.z-management` image version or enabling the `rabbitmq_management` plugin)'
+    required: false
+    default: ''
   plugins:
     description: 'A comma separated list of RabbitMQ plugins which should be enabled'
     required: false
@@ -39,5 +43,6 @@ runs:
     - ${{ inputs.ports }}
     - ${{ inputs.certificates }}
     - ${{ inputs.config }}
+    - ${{ inputs.definitions }}
     - ${{ inputs.plugins }}
     - ${{ inputs.container-name }}
