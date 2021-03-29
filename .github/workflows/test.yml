@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        version: ['3.8.9', 'latest']
+        version: ['3.8.9', '3.8.9-management', 'management', 'latest']
 
     steps:
       - name: Checkout
@@ -25,22 +25,4 @@ jobs:
         uses: ./
         with:
           version: ${{ matrix.version }}
-
-  test-definition:
-    name: Test RabbitMQ Docker image version [${{ matrix.version }}] with definition 
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        version: ['3.8.9-management', 'management']
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Start RabbitMQ
-        uses: ./
-        with:
-          version: ${{ matrix.version }}
-          definition: ${{ github.workspace }}/definition.json
+          definitions: ${{ github.workspace }}/.ci/definitions.json

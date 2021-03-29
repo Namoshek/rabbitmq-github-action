@@ -22,8 +22,8 @@ inputs:
     description: 'Absolute path to the `rabbitmq.conf` configuration file to use'
     required: false
     default: ''
-  definition:
-    description: 'Absolute path to the `definition.json` definition file to use. Remember to use a `X.Y.Z-management` tag if you set this option'
+  definitions:
+    description: 'Absolute path to the `definitions.json` definition file to use (requires using a `x.y.z-management` image version or enabling the `rabbitmq_management` plugin)'
     required: false
     default: ''
   plugins:
@@ -43,6 +43,6 @@ runs:
     - ${{ inputs.ports }}
     - ${{ inputs.certificates }}
     - ${{ inputs.config }}
-    - ${{ inputs.definition }}
+    - ${{ inputs.definitions }}
     - ${{ inputs.plugins }}
     - ${{ inputs.container-name }}
